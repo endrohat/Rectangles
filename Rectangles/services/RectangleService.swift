@@ -10,8 +10,32 @@ import UIKit
 
 class RectangleService {
     
+    private let restURL = "https://domain.com/resourcer/v1/rectangles"
+    
     func getRectangles(completionHandler: @escaping (Result<[Rectangle], Error>) -> Void) {
-        
+        let url = URL(string: restURL)!
+
+        let task = URLSession.shared.dataTask(with: url) {(data, response, error) in
+            if let error = error {
+                completionHandler(.failure(error))
+                return
+            }
+            
+            guard let data = data else {
+                completionHandler(.failure(NSError(domain: "com.indra", code: 0, userInfo: [NSLocalizedDescriptionKey: "No data received"])))
+                return
+            }
+            
+            do {
+                let jsonData = try self.parseJsonData(data: data)
+                return completionHandler(.success(jsonData))
+            } catch {
+                print(error)
+                completionHandler(.failure(error))
+            }
+        }
+
+        task.resume()
     }
     
     func parseJsonData(data: Data) throws ->  [Rectangle] {

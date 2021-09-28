@@ -76,7 +76,8 @@ class ViewController: UIViewController {
             let rectScreenHeight = self.view.bounds.height * rect.size
             
             let rectView = UIView(frame: CGRect(x: rectScreenX, y: rectScreenY, width: rectScreenWidth, height: rectScreenHeight))
-            rectView.backgroundColor = .cyan
+            let swiftColor = UIColor(red: 1, green: 165/255, blue: 0, alpha: 0.5)
+            rectView.backgroundColor = swiftColor
             self.view.addSubview(rectView)
             let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(didPan(_:)))
 

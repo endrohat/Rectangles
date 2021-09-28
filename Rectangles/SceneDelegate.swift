@@ -25,6 +25,9 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let vc = storyboard.instantiateViewController(identifier: "ViewController", creator: { coder -> ViewController? in
                 ViewController(coder: coder, userDefaultsUtils: UserDefaultsUtils(), api: RectangleServiceMockWithData())
+                /* when the API exists
+                ViewController(coder: coder, userDefaultsUtils: UserDefaultsUtils(), api: RectangleService())
+                */
             }
         )
 
